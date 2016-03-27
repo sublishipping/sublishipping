@@ -30,7 +30,7 @@
         <div class="section-row">
           <div class="section-cell">
             <%= ff.label :address1 %>
-            <%= ff.text_area :address1, placeholder: "Elgin" %>
+            <%= ff.text_area :address1, placeholder: "150 Elgin" %>
           </div>
           <div class="section-cell">
             <%= ff.label :company_name %>
@@ -44,17 +44,17 @@
           </div>
           <div class="section-cell">
             <%= ff.label :postal_code %>
-            <%= ff.text_area :postal_code, placeholder: "^H4E.*" %>
+            <%= ff.text_area :postal_code, placeholder: "^K2P(\s|-)*1L4$" %>
           </div>
         </div>
         <div class="section-row">
           <div class="section-cell">
-            <%= ff.label :province, 'Province code', placeholder: "(ON|QC)" %>
-            <%= ff.text_area :province %>
+            <%= ff.label :province, 'Province code' %>
+            <%= ff.text_area :province, placeholder: "(ON|QC)" %>
           </div>
           <div class="section-cell">
-            <%= ff.label :country, 'Country code', placeholder: "^CA$" %>
-            <%= ff.text_area :country %>
+            <%= ff.label :country, 'Country code' %>
+            <%= ff.text_area :country, placeholder: "^CA$" %>
           </div>
         </div>
       </div>
