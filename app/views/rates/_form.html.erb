@@ -20,6 +20,7 @@
     <div class="section-summary">
       <h1>Rate filters</h1>
       <p>Compounded filters used to detect if the provided address matches your prerequisites</p>
+      <p><a href="http://rubular.com/" target="_blank">Need help with regex?</a></p>
     </div>
 
     <%= f.fields_for(:filters, @rate.filters.first || @rate.filters.build) do |ff| %>
