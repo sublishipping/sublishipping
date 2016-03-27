@@ -1,0 +1,24 @@
+<div class="section">
+  <div class="section-summary">
+    <h1>Welcome</h1>
+  </div>
+  <div class="section-content">
+    <div class="section-row">
+      <div class="section-cell">
+        <h1>Welcome to Parcelify!</h1>
+        <p>Click the "New shipping rate" button to get started.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :shopify_app_javascript do %>
+  ShopifyApp.Bar.initialize({
+    title: 'Welcome',
+    buttons: {
+      primary: { label: "New shipping rate", callback: function() {
+        window.location = "<%= new_rate_path %>"
+      }}
+    }
+  });
+<% end %>

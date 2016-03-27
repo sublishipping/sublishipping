@@ -1,6 +1,12 @@
 class RatesController < ShopifyApp::AuthenticatedController
   def index
     @rates = shop.rates.includes(:filters).order(:name)
+
+    if @rates.empty?
+      render('blank')
+    else
+      render('index')
+    end
   end
 
   def show
