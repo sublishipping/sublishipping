@@ -64,7 +64,7 @@
 
 <% content_for :shopify_app_javascript do %>
   ShopifyApp.Bar.initialize({
-    title: 'New',
+    title: "<%= @rate.persisted? ? @rate.name : 'New' %>",
     breadcrumb: { label: "Shipping rates", href: "<%= rates_path %>", target: 'app', loading: false },
     buttons: {
       primary: { label: "Save", callback: function() {
