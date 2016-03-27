@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325214241) do
+ActiveRecord::Schema.define(version: 20160327204307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "filters", force: :cascade do |t|
     t.integer  "rate_id"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "province"
-    t.string   "country"
-    t.string   "postal_code"
-    t.string   "company_name"
+    t.text     "address1"
+    t.text     "address2"
+    t.text     "city"
+    t.text     "province"
+    t.text     "country"
+    t.text     "postal_code"
+    t.text     "company_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
