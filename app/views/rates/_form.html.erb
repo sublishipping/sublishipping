@@ -1,0 +1,81 @@
+<%= form_for(@rate) do |f| %>
+  <div class="section">
+    <div class="section-summary">
+      <h1>Rate details</h1>
+      <p>Publicly available information regarding your shipping rate</p>
+    </div>
+    <div class="section-content">
+      <div class="section-row">
+        <div class="section-cell">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: 'Bike delivery' %>
+          <%= f.label :price, 'Price (in cents)' %>
+          <%= f.text_field :price, placeholder: 0 %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-summary">
+      <h1>Rate filters</h1>
+      <p>Compounded filters used to detect if the provided address matches your prerequisites</p>
+    </div>
+
+    <%= f.fields_for(:filters, @rate.filters.first || @rate.filters.build) do |ff| %>
+      <div class="section-content">
+        <div class="section-row">
+          <div class="section-cell">
+            <%= ff.label :address1 %>
+            <%= ff.text_field :address1 %>
+          </div>
+          <div class="section-cell">
+            <%= ff.label :company_name %>
+            <%= ff.text_field :company_name %>
+          </div>
+        </div>
+        <div class="section-row">
+          <div class="section-cell">
+            <%= ff.label :city %>
+            <%= ff.text_field :city %>
+          </div>
+          <div class="section-cell">
+            <%= ff.label :postal_code %>
+            <%= ff.text_field :postal_code %>
+          </div>
+        </div>
+        <div class="section-row">
+          <div class="section-cell">
+            <%= ff.label :province, 'Province code' %>
+            <%= ff.text_field :province %>
+          </div>
+          <div class="section-cell">
+            <%= ff.label :country, 'Country code' %>
+            <%= ff.text_field :country %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :shopify_app_javascript do %>
+  ShopifyApp.Bar.initialize({
+    title: 'New',
+    breadcrumb: { label: "Shipping rates", href: "<%= rates_path %>", target: 'app', loading: false },
+    buttons: {
+      primary: { label: "Save", callback: function() {
+        $('form').submit()
+      }},
+      secondary: [{
+        label: "Cancel", callback: function() {
+          window.location = "<%= rates_path %>"
+        }
+      }]
+    }
+  });
+
+  <% if @rate.errors.any? %>
+    ShopifyApp.flashError('Oops, something went wrong!');
+  <% end %>
+<% end %>

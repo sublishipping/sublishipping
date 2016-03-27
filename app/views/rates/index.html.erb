@@ -1,0 +1,56 @@
+<div class="section">
+  <div class="section-summary">
+    <h1>Shipping Rates</h1>
+    <p>These are the shipping rates you created.</p>
+  </div>
+
+  <div class="section-content">
+    <% @rates.each do |rate| %>
+      <div class="section-row">
+        <div class="section-cell">
+
+          <h1>
+            <%= rate.name %>
+            <span class="tag lightgray"><%= number_to_currency(rate.price / 100.0) %></span>
+          </h1>
+
+          <ul class="segmented right">
+            <li><%= link_to 'Edit', rate_path(rate), class: %w(btn default btn-slim) %></li>
+            <li><%= link_to 'Delete', rate_path(rate), method: :delete, class: %w(btn destroy btn-slim), data: { confirm: "Delete \"#{rate.name}\"?" } %></li>
+          </ul>
+
+          <% rate.filters.each do |filter| %>
+            <table class="table-section">
+              <thead>
+                <tr>
+                  <th><b>Field</b></th>
+                  <th><b>Regex</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% filter.regexes.each do |(field, regex)| %>
+                  <tr>
+                    <td><%= field %></td>
+                    <td><%= regex %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :shopify_app_javascript do %>
+  ShopifyApp.Bar.initialize({
+    title: 'Shipping Rates',
+    buttons: {
+      primary: { label: "New shipping rate", callback: function() {
+        window.location = "<%= new_rate_path %>"
+      }}
+    }
+  });
+<% end %>
