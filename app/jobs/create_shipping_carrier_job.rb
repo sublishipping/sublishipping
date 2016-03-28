@@ -1,5 +1,7 @@
 class CreateShippingCarrierJob < ApplicationJob
-  def perform(shop)
+  def perform(shop_domain:)
+    shop = Shop.find_by(shopify_domain: shop_domain)
+
     ShopifyAPI::CarrierService.find(:all).each do |carrier_service|
       carrier_service.destroy
     end

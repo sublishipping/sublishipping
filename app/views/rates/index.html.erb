@@ -11,7 +11,7 @@
 
           <h1>
             <%= rate.name %>
-            <span class="tag lightgray"><%= number_to_currency(rate.price / 100.0) %></span>
+            <span class="tag lightgray"><%= shop.currency %> <%= number_to_currency(rate.price / 100.0) %></span>
           </h1>
 
           <ul class="segmented right">

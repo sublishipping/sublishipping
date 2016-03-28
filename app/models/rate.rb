@@ -12,7 +12,7 @@ class Rate < ActiveRecord::Base
       service_name: name,
       service_code: name.underscore,
       total_price: price,
-      currency: 'CAD'
+      currency: shop.currency
     }
   end
 end
