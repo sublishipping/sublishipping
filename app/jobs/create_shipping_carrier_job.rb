@@ -14,5 +14,9 @@ class CreateShippingCarrierJob < ApplicationJob
     )
 
     shop.update_attribute(:shipping_carrier_id, carrier_service.id)
+  ensure
+    unless shop.shipping_carrier_created?
+      shop.update_attribute(:shipping_carrier_id, 0)
+    end
   end
 end

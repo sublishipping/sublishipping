@@ -6,7 +6,11 @@ class Shop < ActiveRecord::Base
   has_many :filters, through: :rates
 
   def shipping_carrier_created?
-    shipping_carrier_id.present?
+    shipping_carrier_id.present? && !shipping_carrier_error?
+  end
+
+  def shipping_carrier_error?
+    shipping_carrier_id == 0
   end
 
   def has_details?

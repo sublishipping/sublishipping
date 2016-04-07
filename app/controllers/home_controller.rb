@@ -1,17 +1,14 @@
 class HomeController < ShopifyApp::AuthenticatedController
-  before_filter :ensure_shop_onboarded
+  before_filter :handle_unsuccessful_onboarding
+  before_filter :ensure_shipping_carrier_created
+  before_filter :ensure_shop_updated
+  before_filter :handle_onboarding_if_required
 
   def index
     redirect_to(rates_path)
   end
 
   private
-
-  def ensure_shop_onboarded
-    ensure_shipping_carrier_created
-    ensure_shop_updated
-    handle_onboarding_if_required
-  end
 
   def ensure_shipping_carrier_created
     return if shop.shipping_carrier_created?
@@ -28,6 +25,11 @@ class HomeController < ShopifyApp::AuthenticatedController
   def handle_onboarding_if_required
     return unless onboarding?
     render('onboarding')
+  end
+
+  def handle_unsuccessful_onboarding
+    return unless shop.shipping_carrier_error?
+    render('error')
   end
 
   def onboarding!
