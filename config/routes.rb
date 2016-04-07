@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   post 'callback/:id', to: 'callback#search'
 
-  resources :rates do
-    end
+  resources :rates
+
+  get 'retry', to: 'home#retry'
 
   root to: 'home#index'
 end

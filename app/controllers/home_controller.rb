@@ -1,11 +1,20 @@
 class HomeController < ShopifyApp::AuthenticatedController
-  before_filter :handle_unsuccessful_onboarding
-  before_filter :ensure_shipping_carrier_created
-  before_filter :ensure_shop_updated
-  before_filter :handle_onboarding_if_required
+  include Haltable
 
   def index
-    redirect_to(rates_path)
+    haltable do
+      handle_unsuccessful_onboarding
+      ensure_shipping_carrier_created
+      ensure_shop_updated
+      handle_onboarding_if_required
+
+      redirect_to(rates_path)
+    end
+  end
+
+  def retry
+    shop.update_attribute(:shipping_carrier_id, nil)
+    redirect_to(root_path)
   end
 
   private
@@ -25,11 +34,13 @@ class HomeController < ShopifyApp::AuthenticatedController
   def handle_onboarding_if_required
     return unless onboarding?
     render('onboarding')
+    halt
   end
 
   def handle_unsuccessful_onboarding
     return unless shop.shipping_carrier_error?
     render('error')
+    halt
   end
 
   def onboarding!

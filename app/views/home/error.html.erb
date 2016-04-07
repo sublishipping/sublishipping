@@ -1,3 +1,13 @@
 <div class="box warning"><i class="ico-warning"></i>
   There was an error onboarding your shop. Access to the Carrier Services API requires the store be on the Unlimited Plan or higher.
 </div>
+
+<% content_for :shopify_app_javascript do %>
+  ShopifyApp.Bar.initialize({
+    buttons: {
+      primary: { label: "Retry", callback: function() {
+        window.location = "<%= retry_path %>"
+      }}
+    }
+  });
+<% end %>
