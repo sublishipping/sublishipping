@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 gem 'haltable'
-gem 'shopify_app', '~> 7.0'
+gem 'shopify_app', git: 'https://github.com/Shopify/shopify_app.git'
 
 group :production do
   gem 'rails_12factor'
