@@ -3,3 +3,9 @@
 <div class="box notice"><i class="ico-notice"></i>
   We're currently syncing up with your Shopify shop. Please sit tight, it shouldn't take long (we hope so!).
 </div>
+
+<% content_for :shopify_app_javascript do %>
+  ShopifyApp.Bar.initialize({
+    buttons: {}
+  });
+<% end %>
