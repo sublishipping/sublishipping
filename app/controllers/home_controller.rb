@@ -25,7 +25,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   end
 
   def undo_onboarding
-    shop.update_attribute(:shipping_carrier_id, nil)
+    shop.remove_shipping_carrier
   end
 
   def ensure_shipping_carrier_created

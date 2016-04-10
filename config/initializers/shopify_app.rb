@@ -5,5 +5,6 @@ ShopifyApp.configure do |config|
   config.embedded_app = true
   config.webhooks = [
     {topic: 'shop/update', address: 'https://parcelify.herokuapp.com/webhooks/shop_update', format: 'json'},
+    {topic: 'app/uninstalled', address: 'https://parcelify.herokuapp.com/webhooks/app_uninstall', format: 'json'}
   ]
 end

@@ -13,6 +13,10 @@ class Shop < ActiveRecord::Base
     shipping_carrier_id == 0
   end
 
+  def remove_shipping_carrier
+    update_attribute(:shipping_carrier_id, nil)
+  end
+
   def has_details?
     currency.present? && money_format.present?
   end
