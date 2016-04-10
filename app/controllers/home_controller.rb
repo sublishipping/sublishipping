@@ -7,17 +7,26 @@ class HomeController < ShopifyApp::AuthenticatedController
       ensure_shipping_carrier_created
       ensure_shop_updated
       handle_onboarding_if_required
-
-      redirect_to(rates_path)
+      handle_successful_onboarding
     end
   end
 
   def retry
-    shop.update_attribute(:shipping_carrier_id, nil)
-    redirect_to(root_path)
+    haltable do
+      undo_onboarding
+      redirect_to_home
+    end
   end
 
   private
+
+  def redirect_to_home
+    redirect_to(root_path)
+  end
+
+  def undo_onboarding
+    shop.update_attribute(:shipping_carrier_id, nil)
+  end
 
   def ensure_shipping_carrier_created
     return if shop.shipping_carrier_created?
@@ -40,6 +49,11 @@ class HomeController < ShopifyApp::AuthenticatedController
   def handle_unsuccessful_onboarding
     return unless shop.shipping_carrier_error?
     render('error')
+    halt
+  end
+
+  def handle_successful_onboarding
+    redirect_to(rates_path)
     halt
   end
 
