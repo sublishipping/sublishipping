@@ -50,7 +50,24 @@
     buttons: {
       primary: { label: "New shipping rate", callback: function() {
         window.location = "<%= new_rate_path %>"
-      }}
+      }},
+      secondary: [{
+        label: "Troubleshoot", callback: function() {
+          ShopifyApp.Modal.confirm(
+            {
+              title: "Having problems?",
+              message: "Rates are not showing up? Having problems deleting / reinstalling the app? We can try to sync back Parcelify with Shopify. Just click here, sit back, relax, and wait. You won't loose any progress.",
+              okButton: "Yes, sync with Shopify",
+              cancelButton: "Cancel",
+              style: "danger"
+            }, function(result) {
+              if (result) {
+                window.location = "<%= retry_path %>"
+              }
+            }
+          );
+        }
+      }]
     }
   });
 <% end %>
