@@ -1,5 +1,6 @@
 class Rate < ActiveRecord::Base
   belongs_to :shop
+
   has_many :filters, dependent: :destroy
 
   validates :name, presence: true
