@@ -31,7 +31,7 @@
                 <% filter.regexes.each do |(field, regex)| %>
                   <tr>
                     <td><%= field %></td>
-                    <td><%= regex %></td>
+                    <td><%= truncate(regex) %></td>
                   </tr>
                 <% end %>
               </tbody>
