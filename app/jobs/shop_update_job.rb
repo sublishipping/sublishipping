@@ -12,5 +12,7 @@ class ShopUpdateJob < ApplicationJob
 
       shop.save!
     end
+  rescue ActiveResource::ResourceNotFound
+    Rails.logger.warn("[#{self.class.name}] Shop not found shop_id=#{shop.id} shop_domain=#{shop_domain}")
   end
 end
