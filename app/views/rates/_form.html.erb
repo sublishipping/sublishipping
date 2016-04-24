@@ -51,10 +51,16 @@
           <div class="section-cell">
             <%= ff.label :province, 'State / Province code' %>
             <%= ff.text_area :province, placeholder: "(ON|QC)" %>
+            <a href="https://en.wikipedia.org/wiki/ISO_3166-2" class="help" target="_blank">
+              ISO 3166-2
+            </a>
           </div>
           <div class="section-cell">
             <%= ff.label :country, 'Country code' %>
             <%= ff.text_area :country, placeholder: "^CA$" %>
+            <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="help" target="_blank">
+              ISO 3166-1 alpha-2
+            </a>
           </div>
         </div>
       </div>
