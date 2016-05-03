@@ -6,7 +6,7 @@ class CallbackController < ApplicationController
 
     rates = shop.rates.select do |rate|
       rate.filters.any? do |filter|
-        filter.regexes.all? do |field, regex|
+        filter.regexes.empty? || filter.regexes.all? do |field, regex|
           destination[field].present? && destination[field].match(/#{regex}/i)
         end
       end

@@ -1,7 +1,6 @@
 class Filter < ActiveRecord::Base
   belongs_to :rate
 
-  validate :validate_presence
   validate :validate_regexes
 
   def self.fields
@@ -17,10 +16,6 @@ class Filter < ActiveRecord::Base
   end
 
   private
-
-  def validate_presence
-    errors.add(:base, :invalid) if regexes.none?
-  end
 
   def validate_regexes
     regexes.each do |field, value|

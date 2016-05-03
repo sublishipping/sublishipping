@@ -28,10 +28,18 @@
                 </tr>
               </thead>
               <tbody>
-                <% filter.regexes.each do |(field, regex)| %>
+                <% if filter.regexes.any? %>
+                  <% filter.regexes.each do |(field, regex)| %>
+                    <tr>
+                      <td><%= field %></td>
+                      <td><%= truncate(regex) %></td>
+                    </tr>
+                  <% end %>
+                <% else %>
                   <tr>
-                    <td><%= field %></td>
-                    <td><%= truncate(regex) %></td>
+                    <td colspan="2">
+                      <i>None</i>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
