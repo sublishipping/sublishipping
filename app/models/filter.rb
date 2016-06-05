@@ -3,8 +3,16 @@ class Filter < ActiveRecord::Base
 
   validate :validate_regexes
 
-  def self.fields
+  def self.address_fields
     %w(address1 address2 city province country postal_code company_name phone)
+  end
+
+  def self.product_fields
+    %w(sku)
+  end
+
+  def self.fields
+    address_fields + product_fields
   end
 
   def regexes
