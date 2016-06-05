@@ -4,7 +4,15 @@ ShopifyApp.configure do |config|
   config.scope = "write_shipping, read_shipping"
   config.embedded_app = true
   config.webhooks = [
-    {topic: 'shop/update', address: 'https://parcelify.herokuapp.com/webhooks/shop_update', format: 'json'},
-    {topic: 'app/uninstalled', address: 'https://parcelify.herokuapp.com/webhooks/app_uninstall', format: 'json'}
+    {
+      topic: 'shop/update',
+      address: "#{Rails.application.config.application_url}/webhooks/shop_update",
+      format: 'json'
+    },
+    {
+      topic: 'app/uninstalled',
+      address: "#{Rails.application.config.application_url}/webhooks/app_uninstall",
+      format: 'json'
+    }
   ]
 end
