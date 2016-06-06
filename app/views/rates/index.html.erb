@@ -9,45 +9,78 @@
       <div class="section-row">
         <div class="section-cell">
 
-          <h1>
-            <%= rate.name %>
-            <span class="tag lightgray"><%= shop.currency %> <%= number_to_currency(rate.price / 100.0) %></span>
-          </h1>
+          <div class="cell-container">
+            <div class="cell-column">
+              <h1>
+                <%= rate.name %>
+                <span class="tag lightgray"><%= shop.currency %> <%= number_to_currency(rate.price / 100.0) %></span>
+              </h1>
 
-          <ul class="segmented right">
-            <li><%= link_to 'Edit', rate_path(rate), class: %w(btn default btn-slim) %></li>
-            <li><%= link_to 'Delete', rate_path(rate), method: :delete, class: %w(btn destroy btn-slim), data: { confirm: "Delete \"#{rate.name}\"?" } %></li>
-          </ul>
+              <ul class="segmented right">
+                <li><%= link_to 'Edit', rate_path(rate), class: %w(btn default btn-slim) %></li>
+                <li><%= link_to 'Delete', rate_path(rate), method: :delete, class: %w(btn destroy btn-slim), data: { confirm: "Delete \"#{rate.name}\"?" } %></li>
+              </ul>
+            </div>
+          </div>
 
-          <% rate.filters.each do |filter| %>
-            <table class="table-section">
-              <thead>
-                <tr>
-                  <th width="50%"><b>Field</b></th>
-                  <th width="50%"><b>Regex</b></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% if filter.regexes.any? %>
-                  <% filter.regexes.each do |(field, regex)| %>
+          <% if rate.limits.any? %>
+            <div class="cell-container">
+              <div class="cell-column">
+                <table class="table-section">
+                  <thead>
                     <tr>
-                      <td><%= field %></td>
-                      <td><%= truncate(regex) %></td>
+                      <th width="50%"><b>Limit</b></th>
+                      <th width="50%"><b>Value</b></th>
                     </tr>
-                  <% end %>
-                <% else %>
-                  <tr>
-                    <td colspan="2">
-                      <i>None</i>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    <% rate.limits.each do |limit, value| %>
+                      <tr>
+                        <td><%= limit %></td>
+                        <td><%= value %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           <% end %>
 
+          <% if rate.filters.any? %>
+            <div class="cell-container">
+              <div class="cell-column">
+                <% rate.filters.each do |filter| %>
+                  <table class="table-section">
+                    <thead>
+                      <tr>
+                        <th width="50%"><b>Field</b></th>
+                        <th width="50%"><b>Regex</b></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if filter.regexes.any? %>
+                        <% filter.regexes.each do |(field, regex)| %>
+                          <tr>
+                            <td><%= field %></td>
+                            <td><%= truncate(regex) %></td>
+                          </tr>
+                        <% end %>
+                      <% else %>
+                        <tr>
+                          <td colspan="2">
+                            <i>None</i>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
+
     <% end %>
   </div>
 </div>

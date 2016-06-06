@@ -50,7 +50,16 @@ class RatesController < ShopifyApp::AuthenticatedController
   private
 
   def rate_params
-    params.require(:rate).permit(:name, :price, :description, filters_attributes: filter_params)
+    params.require(:rate).permit(
+      :name,
+      :price,
+      :description,
+      :min_price,
+      :max_price,
+      :min_grams,
+      :max_grams,
+      filters_attributes: filter_params
+    )
   end
 
   def filter_params

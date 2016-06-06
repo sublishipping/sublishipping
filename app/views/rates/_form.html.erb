@@ -1,7 +1,7 @@
 <%= form_for(@rate) do |f| %>
   <div class="section">
     <div class="section-summary">
-      <h1>Rate details</h1>
+      <h1>Details</h1>
       <p>Publicly available information regarding your shipping rate.</p>
     </div>
     <div class="section-content">
@@ -20,7 +20,36 @@
 
   <div class="section">
     <div class="section-summary">
-      <h1>Rate filters</h1>
+      <h1>Limits</h1>
+      <p>Restrict availability of this rate through price and weight.</p>
+    </div>
+    <div class="section-content">
+      <div class="section-row">
+        <div class="section-cell">
+          <%= f.label :min_grams, 'Minimum weight (grams)' %>
+          <%= f.text_field :min_grams %>
+        </div>
+        <div class="section-cell">
+          <%= f.label :max_grams, 'Maximum weight (grams)' %>
+          <%= f.text_field :max_grams %>
+        </div>
+      </div>
+      <div class="section-row">
+        <div class="section-cell">
+          <%= f.label :min_price, 'Minimum price (cents)' %>
+          <%= f.text_field :min_price %>
+        </div>
+        <div class="section-cell">
+          <%= f.label :max_price, 'Maximum price (cents)' %>
+          <%= f.text_field :max_price %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-summary">
+      <h1>Filters</h1>
       <p>Use these filters to decide whether or not this rate should be available for this checkout.</p>
       <p><a href="http://rubular.com/" target="_blank">Need help with regex?</a></p>
     </div>

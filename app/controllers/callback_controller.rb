@@ -2,14 +2,20 @@ class CallbackController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def search
-    destination = params.fetch('rate', {}).fetch('destination')
-    items = params.fetch('rate', {}).fetch('items', [])
+    value = params.fetch('rate', {})
+    addrs = value.fetch('destination')
+    items = value.fetch('items', [])
+    price = items.sum { |item| item['price'] || 0 }
+    grams = items.sum { |item| item['grams'] || 0 }
 
     rates = shop.rates.includes(:filters).select do |rate|
+      next unless valid_price_for_rate?(rate, price)
+      next unless valid_grams_for_rate?(rate, grams)
+
       rate.filters.any? do |filter|
         filter.regexes.empty? || filter.regexes.all? do |field, regex|
           if Filter.address_fields.include?(field)
-            destination[field].present? && destination[field].match(/#{regex}/i)
+            addrs[field].present? && addrs[field].match(/#{regex}/i)
           elsif Filter.product_fields.include?(field)
             items.all? { |item| item[field].present? && item[field].match(/#{regex}/i) }
           end
@@ -26,6 +32,30 @@ class CallbackController < ApplicationController
 
   def shop
     @shop ||= Shop.find(params[:id])
+  end
+
+  def valid_price_for_rate?(rate, price)
+    if rate.min_price.present? && rate.max_price.present?
+      price.between?(rate.min_price, rate.max_price)
+    elsif rate.min_price.present?
+      price >= rate.min_price
+    elsif rate.max_price.present?
+      price <= rate.max_price
+    else
+      true
+    end
+  end
+
+  def valid_grams_for_rate?(rate, grams)
+    if rate.min_grams.present? && rate.max_grams.present?
+      grams.between?(rate.min_grams, rate.max_grams)
+    elsif rate.min_grams.present?
+      grams >= rate.min_grams
+    elsif rate.max_grams.present?
+      grams <= rate.max_grams
+    else
+      true
+    end
   end
 
 end
