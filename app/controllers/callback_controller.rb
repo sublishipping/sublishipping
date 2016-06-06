@@ -5,7 +5,7 @@ class CallbackController < ApplicationController
     destination = params.fetch('rate', {}).fetch('destination')
     items = params.fetch('rate', {}).fetch('items', [])
 
-    rates = shop.rates.select do |rate|
+    rates = shop.rates.includes(:filters).select do |rate|
       rate.filters.any? do |filter|
         filter.regexes.empty? || filter.regexes.all? do |field, regex|
           if Filter.address_fields.include?(field)
