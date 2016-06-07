@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      rate:
+        name: "Name"
+        price: "Price"
+        description: "Description"
+        min_price: "Minimum price (cents)"
+        max_price: "Maximum price (cents)"
+        min_grams: "Minimum weight (grams)"
+        max_grams: "Maximum weight (grams)"
+      filter:
+        address1: "Address line 1"
+        address2: "Address line 2"
+        city: "City"
+        provice: "State / Province code"
+        country: "Country code"
+        postal_code: "Zip / Postal code"
+        company_name: "Company name"
+        sku: "Product SKU"
