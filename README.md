@@ -23,7 +23,7 @@ Parcelify relies on regular expressions to detect if the address correspond to y
 
 Let's walk through some examples.
 
-#### UK Regions
+##### UK Regions
 
 Let's say you want to have different shipping rates for Northern Ireland and Channel Islands. We can achieve that using two different rates and regular expressions.
 
@@ -48,7 +48,7 @@ We can create a new rate with the following attributes:
 - Country: UK
 - Zip code: ^(GY\d)|(GY10)|(JE\d{1,2})$
 
-#### Free shipping to all Shopify employees
+##### Free shipping to all Shopify employees
 
 That one can be accomplished in multiple ways. The easiest, simplest one would be to simply add a filter on the company name;
 
@@ -60,7 +60,7 @@ While that would work, everyone figuring out the trick might end up adding Shopi
 - City: Ottawa
 - Zip code: ^K1P
 
-#### Bike delivery Miami Beach, Florida
+##### Bike delivery Miami Beach, Florida
 
 Let's say you want to offer free bike delivery to everyone in Miami Beach. That one is quite easy, since the area is delimited by three distinct zip codes; 33139, 33140 and 33141. The rate would simply need to look like this;
 
@@ -68,7 +68,7 @@ Let's say you want to offer free bike delivery to everyone in Miami Beach. That 
 - State: FL
 - Zip code: ^331(39|40|41)$
 
-#### Bike delivery, but for specific items
+##### Bike delivery, but for specific items
 
 How would we restrict the bike delivery to a set of specific items? Luckily, Parcelify also supports filtering by SKUs. So let's say we want to limit the bike delivery to SKU123 and SKU234, we could add another filter;
 
@@ -77,7 +77,7 @@ How would we restrict the bike delivery to a set of specific items? Luckily, Par
 - Zip code: ^331(39|40|41)$
 - SKU: (SKU123|SKU234)
 
-#### Bike delivery, except for specific items
+##### Bike delivery, except for specific items
 
 That becomes interesting. Withing diving too much into details, you can work on exclusion using negative look ahead and it's special character, ?!. Let's say we want to exclude SKU345 and SKU456 from having access to the bike delivery, we could tweak the filters to looke like the following;
 
