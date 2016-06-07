@@ -37,7 +37,7 @@
                     <% rate.limits.each do |limit, value| %>
                       <tr>
                         <td><%= Rate.human_attribute_name(limit) %></td>
-                        <td><%= value %></td>
+                        <td><%= number_with_delimiter(value) %></td>
                       </tr>
                     <% end %>
                   </tbody>
