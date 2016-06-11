@@ -34,7 +34,7 @@ Northern Ireland has 79 postcodes in 6 different counties. Postcodes go from BT1
 
 So that rate would look like the following;
 
-- Country: UK
+- Country: GB
 - Zip code: ^BT\d{1,2}$
 
 Channel Islands include postcodes from GY1 to GY10, as well as all the JE codes. While a bit more complex, it still can be deconstructed quite easily;
@@ -45,7 +45,7 @@ Channel Islands include postcodes from GY1 to GY10, as well as all the JE codes.
 
 We can create a new rate with the following attributes:
 
-- Country: UK
+- Country: GB
 - Zip code: ^(GY\d)|(GY10)|(JE\d{1,2})$
 
 ##### Free shipping to all Shopify employees
