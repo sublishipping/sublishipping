@@ -70,6 +70,6 @@ class RatesController < ShopifyApp::AuthenticatedController
   end
 
   def condition_params
-    Condition::FIELDS + [:id, :_destroy]
+    [:id, :field, :verb, :value, :_destroy]
   end
 end

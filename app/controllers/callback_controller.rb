@@ -8,16 +8,16 @@ class CallbackController < ApplicationController
     price = items.sum { |item| item['price'] || 0 }
     grams = items.sum { |item| item['grams'] || 0 }
 
-    rates = shop.rates.includes(:filters).select do |rate|
+    rates = shop.rates.includes(:filters, :conditions).select do |rate|
       next unless valid_price_for_rate?(rate, price)
       next unless valid_grams_for_rate?(rate, grams)
 
       if rate.conditions.any?
-        conditions.all? do |condition|
+        rate.conditions.all? do |condition|
           if condition.field == 'sku'
-            items.all? { |item| condition.valid_for?(item[field]) }
+            items.all? { |item| condition.valid_for?(item[condition.field]) }
           else
-            condition.valid_for?(address[field])
+            condition.valid_for?(addrs[condition.field])
           end
         end
       else
