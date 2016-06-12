@@ -1,7 +1,6 @@
 class Rate < ActiveRecord::Base
   belongs_to :shop
 
-  has_many :filters, dependent: :destroy
   has_many :conditions, dependent: :destroy
 
   validates :name, presence: true
@@ -11,7 +10,6 @@ class Rate < ActiveRecord::Base
   validates :min_grams, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }, allow_nil: true
   validates :max_grams, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }, allow_nil: true
 
-  accepts_nested_attributes_for :filters
   accepts_nested_attributes_for :conditions, allow_destroy: true, reject_if: :all_blank
 
   def limits

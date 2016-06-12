@@ -1,6 +1,6 @@
 class RatesController < ShopifyApp::AuthenticatedController
   def index
-    @rates = shop.rates.includes(:filters, :conditions).order(:name)
+    @rates = shop.rates.includes(:conditions).order(:name)
 
     if @rates.empty?
       render('blank')
@@ -60,13 +60,8 @@ class RatesController < ShopifyApp::AuthenticatedController
       :max_price,
       :min_grams,
       :max_grams,
-      filters_attributes: filter_params,
       conditions_attributes: condition_params
     )
-  end
-
-  def filter_params
-    Filter.fields + [:id]
   end
 
   def condition_params
