@@ -5,7 +5,7 @@ class CreateConditions < ActiveRecord::Migration
 
       t.string :field, null: false
       t.string :verb, null: false
-      t.string :value, null: false
+      t.text :value, null: false
 
       t.timestamps null: false
     end

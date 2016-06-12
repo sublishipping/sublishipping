@@ -46,37 +46,62 @@
             </div>
           <% end %>
 
-          <% if rate.filters.any? %>
+          <% if rate.conditions.any? %>
             <div class="cell-container">
               <div class="cell-column">
-                <% rate.filters.each do |filter| %>
-                  <table class="table-section">
-                    <thead>
+                <table class="table-section">
+                  <thead>
+                    <tr>
+                      <th width="30%"><b>Field</b></th>
+                      <th width="30%"><b>Verb</b></th>
+                      <th width="40%"><b>Value</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% rate.conditions.each do |condition| %>
                       <tr>
-                        <th width="50%"><b>Field</b></th>
-                        <th width="50%"><b>Regex</b></th>
+                        <td><%= Condition.human_attribute_name(condition.field) %></td>
+                        <td><%= Condition.human_attribute_name(condition.verb) %></td>
+                        <td><%= truncate(condition.value) %></td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      <% if filter.regexes.any? %>
-                        <% filter.regexes.each do |(field, regex)| %>
-                          <tr>
-                            <td><%= Filter.human_attribute_name(field) %></td>
-                            <td><%= truncate(regex) %></td>
-                          </tr>
-                        <% end %>
-                      <% else %>
-                        <tr>
-                          <td colspan="2">
-                            <i>None</i>
-                          </td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                <% end %>
+                    <% end %>
+                  </tbody>
+                </table>
               </div>
             </div>
+          <% else %>
+            <% if rate.filters.any? %>
+              <div class="cell-container">
+                <div class="cell-column">
+                  <% rate.filters.each do |filter| %>
+                    <table class="table-section">
+                      <thead>
+                        <tr>
+                          <th width="50%"><b>Field</b></th>
+                          <th width="50%"><b>Regex</b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if filter.regexes.any? %>
+                          <% filter.regexes.each do |(field, regex)| %>
+                            <tr>
+                              <td><%= Filter.human_attribute_name(field) %></td>
+                              <td><%= truncate(regex) %></td>
+                            </tr>
+                          <% end %>
+                        <% else %>
+                          <tr>
+                            <td colspan="2">
+                              <i>None</i>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

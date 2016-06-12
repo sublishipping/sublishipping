@@ -15,9 +15,9 @@ class CallbackController < ApplicationController
       if rate.conditions.any?
         conditions.all? do |condition|
           if condition.field == 'sku'
-            items.all? { |item| condition.valid?(item[field]) }
+            items.all? { |item| condition.valid_for?(item[field]) }
           else
-            condition.valid?(address[field])
+            condition.valid_for?(address[field])
           end
         end
       else

@@ -7,7 +7,6 @@ class Condition < ActiveRecord::Base
     country
     postal_code
     company_name
-    phone
     sku
   )
 
@@ -25,7 +24,7 @@ class Condition < ActiveRecord::Base
   validates :field, inclusion: FIELDS
   validates :verb, inclusion: VERBS
 
-  def valid?(field)
+  def valid_for?(field)
     return false if field.blank?
 
     case verb
