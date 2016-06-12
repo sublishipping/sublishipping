@@ -40,8 +40,6 @@ class RatesController < ShopifyApp::AuthenticatedController
   def create
     @rate = shop.rates.build(rate_params)
 
-    Rails.logger.info("INFO : #{@rate.conditions}")
-
     if @rate.save
       redirect_to(rates_path)
     else
