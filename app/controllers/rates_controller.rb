@@ -1,6 +1,6 @@
 class RatesController < ShopifyApp::AuthenticatedController
   def index
-    @rates = shop.rates.includes(:filters).order(:name)
+    @rates = shop.rates.includes(:filters, :conditions).order(:name)
 
     if @rates.empty?
       render('blank')
@@ -39,6 +39,8 @@ class RatesController < ShopifyApp::AuthenticatedController
 
   def create
     @rate = shop.rates.build(rate_params)
+
+    Rails.logger.info("INFO : #{@rate.conditions}")
 
     if @rate.save
       redirect_to(rates_path)

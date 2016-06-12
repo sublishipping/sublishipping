@@ -52,64 +52,92 @@
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-summary">
-      <h1>Filters</h1>
-      <p>Use these filters to decide whether or not this rate should be available for this checkout.</p>
-      <p><a href="http://rubular.com/" target="_blank">Need help with regex?</a></p>
-    </div>
+  <% if @rate.new_record? || @rate.conditions.any? %>
+    <div class="section">
+      <div class="section-summary">
+        <h1>Filters</h1>
+        <p>
+          <button class="btn primary" data-condition-add>
+            Add a filter
+          </button>
 
-    <%= f.fields_for(:filters, @rate.filters.first || @rate.filters.build) do |ff| %>
-      <div class="section-content">
-        <div class="section-row">
-          <div class="section-cell">
-            <%= ff.label :address1, 'Address line 1' %>
-            <%= ff.text_area :address1, placeholder: "^150 Elgin$" %>
+          <div style="display: none;" data-condition-template>
+            <%= f.fields_for :conditions, Condition.new do |ff| %>
+              <%= render 'condition', f: ff, destroyed: true, disabled: true %>
+            <% end %>
           </div>
-          <div class="section-cell">
-            <%= ff.label :address2, 'Address line 2' %>
-            <%= ff.text_area :address2, placeholder: "Suite 1234" %>
-          </div>
-        </div>
-        <div class="section-row">
-          <div class="section-cell">
-            <%= ff.label :city %>
-            <%= ff.text_area :city, placeholder: "^Ottawa$" %>
-          </div>
-          <div class="section-cell">
-            <%= ff.label :postal_code, 'Zip / Postal code' %>
-            <%= ff.text_area :postal_code, placeholder: "^K2P(\s|-)*1L4$" %>
-          </div>
-        </div>
-        <div class="section-row">
-          <div class="section-cell">
-            <%= ff.label :province, 'State / Province code' %>
-            <%= ff.text_area :province, placeholder: "(ON|QC)" %>
-            <a href="https://en.wikipedia.org/wiki/ISO_3166-2" class="help" target="_blank">
-              ISO 3166-2
-            </a>
-          </div>
-          <div class="section-cell">
-            <%= ff.label :country, 'Country code' %>
-            <%= ff.text_area :country, placeholder: "^CA$" %>
-            <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="help" target="_blank">
-              ISO 3166-1 alpha-2
-            </a>
-          </div>
-        </div>
-        <div class="section-row">
-          <div class="section-cell">
-            <%= ff.label :company_name %>
-            <%= ff.text_area :company_name, placeholder: "^Shopify$" %>
-          </div>
-          <div class="section-cell">
-            <%= ff.label :sku, 'Product SKU' %>
-            <%= ff.text_area :sku, placeholder: "SKU1|SKU2" %>
-          </div>
-        </div>
+        <p>
+        <p>Use these filters to decide whether or not this rate should be available for this checkout.</p>
+        <p><a href="http://rubular.com/" target="_blank">Need help with regex?</a></p>
       </div>
-    <% end %>
-  </div>
+      <div class="section-content" data-condition-list>
+        <% @rate.conditions.each do |condition| %>
+          <%= f.fields_for :conditions, condition do |ff| %>
+            <%= render 'condition', f: ff %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="section">
+      <div class="section-summary">
+        <h1>Filters</h1>
+        <p>Use these filters to decide whether or not this rate should be available for this checkout.</p>
+        <p><a href="http://rubular.com/" target="_blank">Need help with regex?</a></p>
+      </div>
+
+      <%= f.fields_for(:filters, @rate.filters.first || @rate.filters.build) do |ff| %>
+        <div class="section-content">
+          <div class="section-row">
+            <div class="section-cell">
+              <%= ff.label :address1, 'Address line 1' %>
+              <%= ff.text_area :address1, placeholder: "^150 Elgin$" %>
+            </div>
+            <div class="section-cell">
+              <%= ff.label :address2, 'Address line 2' %>
+              <%= ff.text_area :address2, placeholder: "Suite 1234" %>
+            </div>
+          </div>
+          <div class="section-row">
+            <div class="section-cell">
+              <%= ff.label :city %>
+              <%= ff.text_area :city, placeholder: "^Ottawa$" %>
+            </div>
+            <div class="section-cell">
+              <%= ff.label :postal_code, 'Zip / Postal code' %>
+              <%= ff.text_area :postal_code, placeholder: "^K2P(\s|-)*1L4$" %>
+            </div>
+          </div>
+          <div class="section-row">
+            <div class="section-cell">
+              <%= ff.label :province, 'State / Province code' %>
+              <%= ff.text_area :province, placeholder: "(ON|QC)" %>
+              <a href="https://en.wikipedia.org/wiki/ISO_3166-2" class="help" target="_blank">
+                ISO 3166-2
+              </a>
+            </div>
+            <div class="section-cell">
+              <%= ff.label :country, 'Country code' %>
+              <%= ff.text_area :country, placeholder: "^CA$" %>
+              <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="help" target="_blank">
+                ISO 3166-1 alpha-2
+              </a>
+            </div>
+          </div>
+          <div class="section-row">
+            <div class="section-cell">
+              <%= ff.label :company_name %>
+              <%= ff.text_area :company_name, placeholder: "^Shopify$" %>
+            </div>
+            <div class="section-cell">
+              <%= ff.label :sku, 'Product SKU' %>
+              <%= ff.text_area :sku, placeholder: "SKU1|SKU2" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <% content_for :shopify_app_javascript do %>

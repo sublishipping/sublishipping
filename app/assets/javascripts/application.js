@@ -14,3 +14,25 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$('body').on('click', '[data-condition-add]', function (event) {
+  event.preventDefault();
+
+  var $clone = $("[data-condition-template]").clone();
+  var new_id = new Date().getTime();
+
+  $clone = $($clone.html().replace(/[\_|\[](\d+)[\_|\]]/g, function(x) {
+    return x.replace(/(\d+)/, new_id)
+  }));
+
+  $clone.find('input[type="hidden"]').attr('value', 0);
+
+  $clone.appendTo("[data-condition-list]");
+});
+
+$('body').on('click', '[data-condition-destroy]',  function (event) {
+  event.preventDefault();
+
+  var parent = $(event.target).closest("[data-condition]");
+  parent.hide().find('input[type="hidden"]').attr('value', 1);
+});

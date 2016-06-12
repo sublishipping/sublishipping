@@ -1,0 +1,22 @@
+<div class="section-row" data-condition>
+  <div class="section-cell">
+    <a href="#" class="right" data-condition-destroy>
+      <span class="icon ico-clear-bluegray"></span>
+    </a>
+
+    <%= f.hidden_field :_destroy, value: local_assigns.fetch(:destroyed, false) %>
+
+    <%= f.label :field %>
+    <div class="select-wrapper">
+      <%= f.select :field, Condition::FIELDS, { prompt: 'Field' }, { class: 'select' } %>
+    </div>
+
+    <%= f.label :verb %>
+    <div class="select-wrapper">
+      <%= f.select :verb, Condition::VERBS, { prompt: 'Verb' }, { class: 'select' } %>
+    </div>
+
+    <%= f.label :value %>
+    <%= f.text_field :value %>
+  </div>
+</div>
