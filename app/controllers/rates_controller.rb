@@ -58,11 +58,16 @@ class RatesController < ShopifyApp::AuthenticatedController
       :max_price,
       :min_grams,
       :max_grams,
-      filters_attributes: filter_params
+      filters_attributes: filter_params,
+      conditions_attributes: condition_params
     )
   end
 
   def filter_params
     Filter.fields + [:id]
+  end
+
+  def conditions_attributes
+    Condition::FIELDS + [:id, :_destroy]
   end
 end

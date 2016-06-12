@@ -12,12 +12,22 @@ class CallbackController < ApplicationController
       next unless valid_price_for_rate?(rate, price)
       next unless valid_grams_for_rate?(rate, grams)
 
-      rate.filters.any? do |filter|
-        filter.regexes.empty? || filter.regexes.all? do |field, regex|
-          if Filter.address_fields.include?(field)
-            addrs[field].present? && addrs[field].match(/#{regex}/i)
-          elsif Filter.product_fields.include?(field)
-            items.all? { |item| item[field].present? && item[field].match(/#{regex}/i) }
+      if rate.conditions.any?
+        conditions.all? do |condition|
+          if condition.field == 'sku'
+            items.all? { |item| condition.valid?(item[field]) }
+          else
+            condition.valid?(address[field])
+          end
+        end
+      else
+        rate.filters.any? do |filter|
+          filter.regexes.empty? || filter.regexes.all? do |field, regex|
+            if Filter.address_fields.include?(field)
+              addrs[field].present? && addrs[field].match(/#{regex}/i)
+            elsif Filter.product_fields.include?(field)
+              items.all? { |item| item[field].present? && item[field].match(/#{regex}/i) }
+            end
           end
         end
       end
