@@ -8,12 +8,22 @@
 
     <%= f.label :field %>
     <div class="select-wrapper">
-      <%= f.select :field, Condition::FIELDS, { prompt: 'Field' }, { class: 'select' } %>
+      <%=
+        f.select :field,
+          Condition::FIELDS.map { |field| [t(field, scope: 'conditions.fields'), field] },
+          { prompt: 'Field' },
+          { class: 'select' }
+      %>
     </div>
 
     <%= f.label :verb %>
     <div class="select-wrapper">
-      <%= f.select :verb, Condition::VERBS, { prompt: 'Verb' }, { class: 'select' } %>
+      <%=
+        f.select :verb,
+          Condition::VERBS.map { |verb| [t(verb, scope: 'conditions.verbs'), verb] },
+          { prompt: 'Verb' },
+          { class: 'select' }
+      %>
     </div>
 
     <%= f.label :value %>

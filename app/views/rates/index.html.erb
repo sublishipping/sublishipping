@@ -59,8 +59,8 @@
                 <tbody>
                   <% rate.conditions.each do |condition| %>
                     <tr>
-                      <td><%= Condition.human_attribute_name(condition.field) %></td>
-                      <td><%= Condition.human_attribute_name(condition.verb) %></td>
+                      <td><%= t(condition.field, scope: 'conditions.fields') %></td>
+                      <td><%= t(condition.verb, scope: 'conditions.verbs') %></td>
                       <td><%= truncate(condition.value) %></td>
                     </tr>
                   <% end %>
