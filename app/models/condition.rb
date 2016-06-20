@@ -24,22 +24,22 @@ class Condition < ActiveRecord::Base
   validates :field, inclusion: FIELDS
   validates :verb, inclusion: VERBS
 
-  def valid_for?(field)
-    return false if field.blank?
+  def valid_for?(string)
+    return false if string.nil?
 
     case verb
     when 'regex'
-      field.match(/#{value}/i)
+      string.match(/#{value}/i)
     when 'include'
-      field.include?(value)
+      string.include?(value)
     when 'exclude'
-      field.exclude?(value)
+      string.exclude?(value)
     when 'equal'
-      field == value
+      string == value
     when 'start_with'
-      field.start_with?(value)
+      string.match(/\A#{value}/i)
     when 'end_with'
-      field.start_width?(value)
+      string.match(/#{value}\z/i)
     end
   end
 end
