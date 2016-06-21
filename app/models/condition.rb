@@ -28,12 +28,10 @@ class Condition < ActiveRecord::Base
     return false if string.nil?
 
     case verb
-    when 'regex'
+    when 'regex', 'include'
       string.match(/#{value}/i)
-    when 'include'
-      string.include?(value)
     when 'exclude'
-      string.exclude?(value)
+      string !~ /#{value}/i
     when 'equal'
       string == value
     when 'start_with'
