@@ -35,9 +35,9 @@ class Condition < ActiveRecord::Base
     when 'equal'
       string == value
     when 'start_with'
-      string.match(/\A#{value}/i)
+      string.match(/\A(#{value})/i)
     when 'end_with'
-      string.match(/#{value}\z/i)
+      string.match(/(#{value})\z/i)
     end
   end
 end
