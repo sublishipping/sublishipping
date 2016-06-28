@@ -13,7 +13,12 @@
             <div class="cell-column">
               <h1>
                 <%= rate.name %>
-                <span class="tag lightgray"><%= shop.currency %> <%= number_to_currency(rate.price / 100.0) %></span>
+                <span class="tag lightgray"><%= shop.currency %>
+                  <%= number_to_currency(rate.price / 100.0) %>
+                  <% unless rate.price_weight_modifier.zero? %>
+                    <%= " + #{number_to_currency(rate.price_weight_modifier / 100.0)} per gram" %>
+                  <% end %>
+                </span>
               </h1>
 
               <ul class="segmented right">

@@ -53,6 +53,7 @@ class RatesController < ShopifyApp::AuthenticatedController
     params.require(:rate).permit(
       :name,
       :price,
+      :price_weight_modifier,
       :description,
       :min_price,
       :max_price,

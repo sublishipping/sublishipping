@@ -21,7 +21,7 @@ class CallbackController < ApplicationController
       end
     end
 
-    render json: { rates: rates.map(&:to_hash) }
+    render json: { rates: rates.map { |rate| rate.to_hash(grams: grams) } }
   rescue JSON::ParserError
     nil
   end

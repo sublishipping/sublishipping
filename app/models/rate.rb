@@ -5,6 +5,7 @@ class Rate < ActiveRecord::Base
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }
+  validates :price_weight_modifier, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }
   validates :min_price, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }, allow_nil: true
   validates :max_price, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }, allow_nil: true
   validates :min_grams, numericality: { greater_than_or_equal_to: 0, less_than: 10_000_000 }, allow_nil: true
@@ -21,12 +22,16 @@ class Rate < ActiveRecord::Base
     }.select { |_, v| v }
   end
 
-  def to_hash
+  def to_hash(grams: 0)
     {
       service_name: name,
       service_code: name.underscore,
-      total_price: price,
+      total_price: total_price(grams: grams),
       currency: shop.currency
     }
+  end
+
+  def total_price(grams:)
+    price + (grams * price_weight_modifier)
   end
 end
