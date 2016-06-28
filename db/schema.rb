@@ -11,35 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327204307) do
+ActiveRecord::Schema.define(version: 20160612004305) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "filters", force: :cascade do |t|
+  create_table "conditions", force: :cascade do |t|
     t.integer  "rate_id"
-    t.text     "address1"
-    t.text     "address2"
-    t.text     "city"
-    t.text     "province"
-    t.text     "country"
-    t.text     "postal_code"
-    t.text     "company_name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "field",      null: false
+    t.string   "verb",       null: false
+    t.text     "value",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "filters", ["rate_id"], name: "index_filters_on_rate_id", using: :btree
+  add_index "conditions", ["rate_id"], name: "index_conditions_on_rate_id"
 
   create_table "rates", force: :cascade do |t|
     t.integer  "shop_id"
     t.string   "name"
     t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.integer  "min_grams"
+    t.integer  "max_grams"
+    t.integer  "min_price"
+    t.integer  "max_price"
   end
 
-  add_index "rates", ["shop_id"], name: "index_rates_on_shop_id", using: :btree
+  add_index "rates", ["shop_id"], name: "index_rates_on_shop_id"
 
   create_table "shops", force: :cascade do |t|
     t.string   "shopify_domain",      null: false
@@ -47,10 +45,10 @@ ActiveRecord::Schema.define(version: 20160327204307) do
     t.integer  "shipping_carrier_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "currency"
+    t.string   "money_format"
   end
 
-  add_index "shops", ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true, using: :btree
+  add_index "shops", ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
 
-  add_foreign_key "filters", "rates"
-  add_foreign_key "rates", "shops"
 end
