@@ -5,8 +5,8 @@ class CallbackController < ApplicationController
     value = params.fetch('rate', {})
     addrs = value.fetch('destination')
     items = value.fetch('items', [])
-    price = items.sum { |item| item['price'] || 0 }
-    grams = items.sum { |item| item['grams'] || 0 }
+    price = items.sum { |item| (item['price'] || 0) * item['quantity'] }
+    grams = items.sum { |item| (item['grams'] || 0) * item['quantity'] }
 
     rates = shop.rates.includes(:conditions).select do |rate|
       next unless valid_price_for_rate?(rate, price)
