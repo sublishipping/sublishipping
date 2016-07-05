@@ -3,10 +3,10 @@ class CallbackController < ApplicationController
 
   def search
     value = params.fetch('rate', {})
-    addrs = value.fetch('destination')
+    addrs = value.fetch('destination', {})
     items = value.fetch('items', [])
-    price = items.sum { |item| (item['price'] || 0) * item['quantity'] }
-    grams = items.sum { |item| (item['grams'] || 0) * item['quantity'] }
+    price = items.sum { |item| item['price'] * item['quantity'] }
+    grams = items.sum { |item| item['grams'] * item['quantity'] }
 
     rates = shop.rates.includes(:conditions).select do |rate|
       next unless valid_price_for_rate?(rate, price)
@@ -20,6 +20,8 @@ class CallbackController < ApplicationController
         end
       end
     end
+
+    Rails.logger.info("[#{self.class.name}] #{rates.size} rates found")
 
     render json: { rates: rates.map { |rate| rate.to_hash(grams: grams) } }
   rescue JSON::ParserError
