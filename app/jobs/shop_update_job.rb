@@ -8,6 +8,7 @@ class ShopUpdateJob < ApplicationJob
       shop.assign_attributes(
         currency: shopify_shop.currency,
         money_format: shopify_shop.money_in_emails_format,
+        locale: shopify_shop.primary_locale,
       )
 
       shop.save!
