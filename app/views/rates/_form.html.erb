@@ -23,15 +23,16 @@
 
   <div class="section">
     <div class="section-summary">
-      <h1>Price</h1>
-      <p>Total Price = Base price + (Weight modifier * grams)</p>
+      <h1>Price (<%= shop.currency %>)</h1>
+      <p>All prices are in sub-units, i.e. cents, pennies, pence, etc.</p>
+      <p>Total Price = Base price + (Price per gram * grams)</p>
     </div>
     <div class="section-content">
       <div class="section-row">
         <div class="section-cell">
-          <%= f.label :price, 'Base Price (in cents)' %>
+          <%= f.label :price, 'Base Price' %>
           <%= f.text_field :price, placeholder: 0 %>
-          <%= f.label :price_weight_modifier, 'Weight modifier (cent by gram)' %>
+          <%= f.label :price_weight_modifier, 'Price per gram' %>
           <%= f.text_field :price_weight_modifier, placeholder: 0 %>
         </div>
       </div>

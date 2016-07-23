@@ -26,10 +26,10 @@ en:
         name: "Name"
         price: "Price"
         description: "Description"
-        min_price: "Minimum price (cents)"
-        max_price: "Maximum price (cents)"
-        min_grams: "Minimum weight (grams)"
-        max_grams: "Maximum weight (grams)"
+        min_price: "Minimum price"
+        max_price: "Maximum price"
+        min_grams: "Minimum grams"
+        max_grams: "Maximum grams"
   conditions:
     fields:
       address1: "Address line 1"

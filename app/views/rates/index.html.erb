@@ -13,10 +13,24 @@
             <div class="cell-column">
               <h1>
                 <%= rate.name %>
-                <span class="tag lightgray"><%= shop.currency %>
-                  <%= number_to_currency(rate.price / 100.0) %>
+                <span class="tag lightgray">
+                  <%=
+                    number_to_currency(
+                      rate.price / 100.0,
+                      unit: shop.currency,
+                      format: "%n %u"
+                    )
+                  %>
+
                   <% unless rate.price_weight_modifier.zero? %>
-                    <%= " + #{number_to_currency(rate.price_weight_modifier / 100.0)} per gram" %>
+                    <%= " + " %>
+                    <%=
+                      number_to_currency(
+                        rate.price_weight_modifier / 100.0,
+                        format: "%n"
+                      )
+                    %>
+                    <%= " per gram" %>
                   <% end %>
                 </span>
               </h1>
@@ -39,10 +53,47 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% rate.limits.each do |limit, value| %>
+                    <% if rate.min_price.present? %>
                       <tr>
-                        <td><%= Rate.human_attribute_name(limit) %></td>
-                        <td><%= number_with_delimiter(value) %></td>
+                        <td><%= Rate.human_attribute_name(:min_price) %></td>
+                        <td>
+                          <%=
+                            number_to_currency(
+                              rate.min_price / 100.0,
+                              unit: shop.currency,
+                              format: "%n %u"
+                            )
+                          %>
+                        </td>
+                      </tr>
+                    <% end %>
+
+                    <% if rate.max_price.present? %>
+                      <tr>
+                        <td><%= Rate.human_attribute_name(:max_price) %></td>
+                        <td>
+                          <%=
+                            number_to_currency(
+                              rate.max_price / 100.0,
+                              unit: shop.currency,
+                              format: "%n %u"
+                            )
+                          %>
+                        </td>
+                      </tr>
+                    <% end %>
+
+                    <% if rate.min_grams.present? %>
+                      <tr>
+                        <td><%= Rate.human_attribute_name(:min_grams) %></td>
+                        <td><%= number_with_delimiter(rate.min_grams) %> grams</td>
+                      </tr>
+                    <% end %>
+
+                    <% if rate.max_grams.present? %>
+                      <tr>
+                        <td><%= Rate.human_attribute_name(:max_grams) %></td>
+                        <td><%= number_with_delimiter(rate.max_grams) %> grams</td>
                       </tr>
                     <% end %>
                   </tbody>
