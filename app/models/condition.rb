@@ -33,7 +33,7 @@ class Condition < ActiveRecord::Base
     when 'exclude'
       string !~ /#{value}/i
     when 'equal'
-      string == value
+      string.match(/\A(#{value})\z/i)
     when 'start_with'
       string.match(/\A(#{value})/i)
     when 'end_with'
