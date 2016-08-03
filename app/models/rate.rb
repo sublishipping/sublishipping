@@ -27,7 +27,8 @@ class Rate < ActiveRecord::Base
       service_name: name,
       service_code: name.underscore,
       total_price: total_price(grams: grams),
-      currency: shop.currency
+      currency: shop.currency,
+      description: description,
     }
   end
 
