@@ -11,7 +11,7 @@
 
           <div class="cell-container">
             <div class="cell-column">
-              <h1>
+              <h1 style="font-size: 1.5em; color: #31373d">
                 <%= rate.name %>
                 <span class="tag lightgray">
                   <%=
@@ -45,85 +45,99 @@
           <% if rate.limits.any? %>
             <div class="cell-container">
               <div class="cell-column">
-                <table class="table-section">
-                  <thead>
-                    <tr>
-                      <th width="40%"><b>Limit</b></th>
-                      <th width="60%"><b>Value</b></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% if rate.min_price.present? %>
-                      <tr>
-                        <td><%= Rate.human_attribute_name(:min_price) %></td>
-                        <td>
-                          <%=
-                            number_to_currency(
-                              rate.min_price / 100.0,
-                              unit: shop.currency,
-                              format: "%n %u"
-                            )
-                          %>
-                        </td>
-                      </tr>
-                    <% end %>
+                <h1>This rate is only valid for orders within those limits;</h1>
+                <ul>
+                  <% if rate.min_price.present? %>
+                    <li>
+                      <%= Rate.human_attribute_name(:min_price) %>:
+                      <%=
+                        number_to_currency(
+                          rate.min_price / 100.0,
+                          unit: shop.currency,
+                          format: "%n %u"
+                        )
+                      %>
+                    </li>
+                  <% end %>
 
-                    <% if rate.max_price.present? %>
-                      <tr>
-                        <td><%= Rate.human_attribute_name(:max_price) %></td>
-                        <td>
-                          <%=
-                            number_to_currency(
-                              rate.max_price / 100.0,
-                              unit: shop.currency,
-                              format: "%n %u"
-                            )
-                          %>
-                        </td>
-                      </tr>
-                    <% end %>
+                  <% if rate.max_price.present? %>
+                    <li>
+                      <%= Rate.human_attribute_name(:max_price) %>:
+                      <%=
+                        number_to_currency(
+                          rate.max_price / 100.0,
+                          unit: shop.currency,
+                          format: "%n %u"
+                        )
+                      %>
+                    </li>
+                  <% end %>
 
-                    <% if rate.min_grams.present? %>
-                      <tr>
-                        <td><%= Rate.human_attribute_name(:min_grams) %></td>
-                        <td><%= number_with_delimiter(rate.min_grams) %> grams</td>
-                      </tr>
-                    <% end %>
+                  <% if rate.min_grams.present? %>
+                    <li>
+                      <%= Rate.human_attribute_name(:min_grams) %>:
+                      <%= number_with_delimiter(rate.min_grams) %> grams
+                    </li>
+                  <% end %>
 
-                    <% if rate.max_grams.present? %>
-                      <tr>
-                        <td><%= Rate.human_attribute_name(:max_grams) %></td>
-                        <td><%= number_with_delimiter(rate.max_grams) %> grams</td>
-                      </tr>
-                    <% end %>
-                  </tbody>
-                </table>
+                  <% if rate.max_grams.present? %>
+                    <li>
+                      <%= Rate.human_attribute_name(:max_grams) %>:
+                      <%= number_with_delimiter(rate.max_grams) %> grams
+                    </li>
+                  <% end %>
+                </ul>
               </div>
             </div>
           <% end %>
 
-          <div class="cell-container">
-            <div class="cell-column">
-              <table class="table-section">
-                <thead>
-                  <tr>
-                    <th width="20%"><b>Field</b></th>
-                    <th width="20%"><b>Verb</b></th>
-                    <th width="60%"><b>Value</b></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% rate.conditions.each do |condition| %>
-                    <tr>
-                      <td><%= t(condition.field, scope: 'conditions.fields') %></td>
-                      <td><%= t(condition.verb, scope: 'conditions.verbs') %></td>
-                      <td><%= truncate(condition.value) %></td>
-                    </tr>
+          <% if rate.product_specific_prices.any? %>
+            <div class="cell-container">
+              <div class="cell-column">
+                <h1>Additional costs will be applied;</h1>
+                <ul>
+                  <% rate.product_specific_prices.each do |product_specific_price| %>
+                    <li>
+                      <%=
+                        number_to_currency(
+                          product_specific_price.price / 100.0,
+                          unit: shop.currency,
+                          format: "%n %u"
+                        )
+                      %>
+                      <%= "when an item has a" %>
+                      <%= t(product_specific_price.field, scope: 'product_specific_prices.fields').downcase %>
+                      <%= "that" %>
+                      <%= t(product_specific_price.verb, scope: 'matcher.actions').downcase %>
+                      <%= truncate(product_specific_price.value) %></td>
+                    </li>
                   <% end %>
-                </tbody>
-              </table>
+                </ul>
+              </div>
             </div>
-          </div>
+          <% end %>
+
+          <% if rate.conditions.any? %>
+            <div class="cell-container">
+              <div class="cell-column">
+                <h1>This rate is only valid when all the following conditions are met;</h1>
+                <ul>
+                  <% rate.conditions.each do |condition| %>
+                    <li>
+                      <% if condition.field == "sku" %>
+                        <%= "all product skus" %>
+                      <% else %>
+                        <%= "the destination" %>
+                        <%= t(condition.field, scope: 'conditions.fields').downcase %>
+                      <% end %>
+                      <%= t(condition.verb, scope: 'matcher.actions').downcase %>
+                      <%= truncate(condition.value) %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
 

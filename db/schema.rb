@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723165413) do
+ActiveRecord::Schema.define(version: 20161007160843) do
 
   create_table "conditions", force: :cascade do |t|
     t.integer  "rate_id"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20160723165413) do
   end
 
   add_index "conditions", ["rate_id"], name: "index_conditions_on_rate_id"
+
+  create_table "product_specific_prices", force: :cascade do |t|
+    t.integer  "rate_id"
+    t.string   "field",      null: false
+    t.string   "verb",       null: false
+    t.text     "value",      null: false
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "product_specific_prices", ["rate_id"], name: "index_product_specific_prices_on_rate_id"
 
   create_table "rates", force: :cascade do |t|
     t.integer  "shop_id"

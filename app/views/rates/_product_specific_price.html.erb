@@ -1,6 +1,6 @@
-<div class="section-row" data-condition>
+<div class="section-row" data-product_specific_price>
   <div class="section-cell">
-    <a href="#" class="right" data-condition-destroy>
+    <a href="#" class="right" data-product_specific_price-destroy>
       <span class="icon ico-clear-bluegray"></span>
     </a>
 
@@ -10,7 +10,7 @@
     <div class="select-wrapper">
       <%=
         f.select :field,
-          Condition::FIELDS.map { |field| [t(field, scope: 'conditions.fields'), field] },
+          ProductSpecificPrice::FIELDS.map { |field| [t(field, scope: 'product_specific_prices.fields'), field] },
           { prompt: 'Field' },
           { class: 'select' }
       %>
@@ -28,5 +28,8 @@
 
     <%= f.label :value %>
     <%= f.text_field :value %>
+
+    <%= f.label :price, 'Price to add' %>
+    <%= f.text_field :price %>
   </div>
 </div>

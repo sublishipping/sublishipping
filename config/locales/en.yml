@@ -40,6 +40,12 @@ en:
       postal_code: "Zip / Postal code"
       company_name: "Company name"
       sku: "Product SKU"
+  product_specific_prices:
+    fields:
+      name: "Product name"
+      vendor: "Vendor name"
+      sku: "Product SKU"
+  matcher:
     verbs:
       regex: "Regular Expression"
       include: "Include"
@@ -47,3 +53,10 @@ en:
       equal: "Equal"
       start_with: "Start with"
       end_with: "End with"
+    actions:
+      regex: "contain"
+      include: "include"
+      exclude: "exclude"
+      equal: "equal to"
+      start_with: "start with"
+      end_with: "end with"

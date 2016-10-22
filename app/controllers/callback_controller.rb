@@ -8,9 +8,12 @@ class CallbackController < ApplicationController
     price = items.sum { |item| item['price'] * item['quantity'] }
     grams = items.sum { |item| item['grams'] * item['quantity'] }
 
-    rates = shop.rates.includes(:conditions).select do |rate|
+    rates = shop.rates.includes(:conditions, :product_specific_prices).select do |rate|
       next unless valid_price_for_rate?(rate, price)
       next unless valid_grams_for_rate?(rate, grams)
+
+      rate.grams = grams
+      rate.items = items
 
       rate.conditions.all? do |condition|
         if condition.field == 'sku'
@@ -23,7 +26,7 @@ class CallbackController < ApplicationController
 
     Rails.logger.info("[#{self.class.name}] #{rates.size} rates found")
 
-    render json: { rates: rates.map { |rate| rate.to_hash(grams: grams) } }
+    render json: { rates: rates.map { |rate| rate.to_hash } }
   rescue JSON::ParserError
     nil
   end
