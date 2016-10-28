@@ -28,9 +28,9 @@ en:
         description: "Description"
         min_price: "Minimum price"
         max_price: "Maximum price"
-        min_grams: "Minimum grams"
-        max_grams: "Maximum grams"
-  conditions:
+        min_grams: "Minimum weight"
+        max_grams: "Maximum weight"
+  matcher:
     fields:
       address1: "Address line 1"
       address2: "Address line 2"
@@ -39,13 +39,9 @@ en:
       country: "Country code"
       postal_code: "Zip / Postal code"
       company_name: "Company name"
-      sku: "Product SKU"
-  product_specific_prices:
-    fields:
       name: "Product name"
       vendor: "Vendor name"
       sku: "Product SKU"
-  matcher:
     verbs:
       regex: "Regular Expression"
       include: "Include"

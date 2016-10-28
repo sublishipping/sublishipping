@@ -10,7 +10,7 @@
     <div class="select-wrapper">
       <%=
         f.select :field,
-          ProductSpecificPrice::FIELDS.map { |field| [t(field, scope: 'product_specific_prices.fields'), field] },
+          Matcher::PRODUCT_FIELDS.map { |field| [t(field, scope: 'matcher.fields'), field] },
           { prompt: 'Field' },
           { class: 'select' }
       %>

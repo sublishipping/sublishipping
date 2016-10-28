@@ -1,4 +1,22 @@
 class Matcher
+  PRODUCT_FIELDS = %w(
+    name
+    sku
+    vendor
+  )
+
+  ADDRESS_FIELDS = %w(
+    address1
+    address2
+    city
+    province
+    country
+    postal_code
+    company_name
+  )
+
+  FIELDS = ADDRESS_FIELDS + PRODUCT_FIELDS
+
   VERBS = %w(
     regex
     include

@@ -106,7 +106,7 @@
                         )
                       %>
                       <%= "when an item has a" %>
-                      <%= t(product_specific_price.field, scope: 'product_specific_prices.fields').downcase %>
+                      <%= t(product_specific_price.field, scope: 'matcher.fields').downcase %>
                       <%= "that" %>
                       <%= t(product_specific_price.verb, scope: 'matcher.actions').downcase %>
                       <%= truncate(product_specific_price.value) %></td>
@@ -124,11 +124,12 @@
                 <ul>
                   <% rate.conditions.each do |condition| %>
                     <li>
-                      <% if condition.field == "sku" %>
-                        <%= "all product skus" %>
+                      <% if Matcher::PRODUCT_FIELDS.include?(condition.field) %>
+                        <%= "all" %>
+                        <%= t(condition.field, scope: 'matcher.fields').downcase.pluralize %>
                       <% else %>
                         <%= "the destination" %>
-                        <%= t(condition.field, scope: 'conditions.fields').downcase %>
+                        <%= t(condition.field, scope: 'matcher.fields').downcase %>
                       <% end %>
                       <%= t(condition.verb, scope: 'matcher.actions').downcase %>
                       <%= truncate(condition.value) %>

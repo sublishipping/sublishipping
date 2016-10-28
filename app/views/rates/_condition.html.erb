@@ -10,7 +10,7 @@
     <div class="select-wrapper">
       <%=
         f.select :field,
-          Condition::FIELDS.map { |field| [t(field, scope: 'conditions.fields'), field] },
+          Matcher::FIELDS.map { |field| [t(field, scope: 'matcher.fields'), field] },
           { prompt: 'Field' },
           { class: 'select' }
       %>
