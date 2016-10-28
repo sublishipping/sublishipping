@@ -16,13 +16,23 @@
 * GENERAL ELEMENTS
 *******************************************/
 
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 * {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', Roboto, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 body {
-    line-height: 18px;
+    line-height: 1.428;
     color: #31373d;
     background: #ebeef0;
     text-align: left;
@@ -104,8 +114,8 @@ form {
 a {
     color: #479ccf;
     text-decoration: none;
-    line-height: 18px;
-    font-size: 13px;
+    line-height: 1.428;
+    font-size: 15px;
     font-weight: none;
     position: relative;
 }
@@ -423,7 +433,7 @@ hr {
     font-size: 18px;
     margin-bottom: 10px;
     margin-bottom: 0px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .section-summary p {
@@ -753,6 +763,7 @@ hr {
     margin-right: 10px;
     padding: 5px 10px;
     vertical-align: middle;
+    display: inline-block;
 }
 
 .tag.green {
@@ -939,7 +950,7 @@ label {
     color: #000;
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 label.label-normal {
