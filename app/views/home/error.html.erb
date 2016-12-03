@@ -1,5 +1,32 @@
-<div class="box warning"><i class="ico-warning"></i>
-  There was an error onboarding your shop. Shopify requires your store to be on the <a href="https://www.shopify.ca/pricing" target="_blank">Advanced plan or higher</a> to get access to the Real-time carrier shipping API, which this app requires. Unfortunately, there's nothing Parcelify can do. We've heard stories of people getting access to the API by calling Shopify support, but don't quote us on that. Good luck!
+<div class="box warning">
+  <i class="ico-warning"></i>
+  There was an error onboarding your shop.
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-row">
+      <div class="section-cell">
+        <div class="cell-container">
+          <div class="cell-column">
+            <label>We're sorry, but...</label>
+            <p>
+              In order for Parcelify to work properly, it requires access to Shopify's <a href="https://help.shopify.com/api/reference/carrierservice" target="_blank">CarrierService API</a>. Unfortunately, access to this API is restricted to <a href="https://www.shopify.ca/pricing" target="_blank">advanced plans</a> only. This restriction is imposed by Shopify and there's nothing Parcelify can do. Some clients mentioned they successfuly convinced Shopify to give them access to the API by calling their support, but we cannot promise anything. If you want to try it, here's what you need to know;
+            </p>
+
+            <ul>
+              <li>You want to install <a href="https://apps.shopify.com/parcelify" target="_blank">Parcelify</a></li>
+              <li>You need access to the <a href="https://help.shopify.com/api/reference/carrierservice" target="_blank">CarrierService API</a></li>
+            </ul>
+
+            <p>
+              Good luck!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% content_for :shopify_app_javascript do %>
