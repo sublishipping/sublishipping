@@ -29,8 +29,6 @@
       });
 
       ShopifyApp.ready(function() {
-        ShopifyApp.Bar.setIcon('https://image.freepik.com/free-icon/delivery-truck-side-view_318-45897.png');
-
         <%= yield :shopify_app_javascript %>
 
         ShopifyApp.Bar.loadingOff();
