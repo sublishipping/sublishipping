@@ -3,12 +3,12 @@ class CreateShippingCarrierJob < ApplicationJob
     shop = Shop.find_by(shopify_domain: shop_domain)
 
     shop.with_shopify_session do
-      begin
-        ShopifyAPI::CarrierService.find(:all).each do |carrier_service|
+      ShopifyAPI::CarrierService.find(:all).each do |carrier_service|
+        begin
           carrier_service.destroy
+        rescue
+          # Failed to delete carrier. Should we care?
         end
-      rescue
-        # Failed to delete carrier. Should we care?
       end
 
       carrier_service = ShopifyAPI::CarrierService.create(
