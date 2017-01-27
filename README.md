@@ -2,6 +2,8 @@
 
 > Parcelify let you create simple yet powerful shipping rates based on address fields. Whether you'd like to create a "5$ Bike delivery" shipping rates for your neighbors, a "Free hand delivery" for your coworkers or an expensive 25$ "Plane delivery" for that remote region in your country, we've got your back.
 
+## Documentation
+
 ### Limits
 
 Limits are there to limit your rate to certain conditions. Use them to make sure your rate only shows up if the order is below 25kg, or above $100, or both. When specifying limits, always use the lowest unit of your currency and weight system. Cents for US, pence for UK, etc.
@@ -35,7 +37,7 @@ This will check if the field starts with a specific value. Let's say you'd like 
 - **Verb**: Start with
 - **Value**: 902
 
-"90210" and "90213" would both be a match valid values. You can also match multiple values, seperated by the "|" symbol. If, for example, you'd like to match no only Beverly Hills, but also the nearby La Brea district, you could go as follow;
+"90210" and "90213" would both be a match valid values. You can also match multiple values, seperated by the "|" symbol. If, for example, you'd like to match not only Beverly Hills, but also the nearby La Brea district, you could go as follow;
 
 - **Field**: Zip code
 - **Verb**: Start with
@@ -95,6 +97,15 @@ Rate would then be valid for all addresses with a zip code that starts with BT, 
 
 [You can find more information here](http://www.regular-expressions.info/lookaround.html).
 
+## Installation
+
+This app is open source with an MIT license. Feel free to clone and modify to suit your needs. It was made for Heroku but can probably run on any compatible setup. In addition to the default Heroku environement variables, you'll also need to define;
+
+- `APPLICATION_URL`
+- `SHOPIFY_CLIENT_API_KEY`
+- `SHOPIFY_CLIENT_API_SECRET`
+
+## Additional information
 
 ### Details
 
