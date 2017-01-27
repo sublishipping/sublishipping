@@ -10,7 +10,7 @@ class ContextualRate
   def to_hash
     {
       service_name: rate.name,
-      service_code: rate.name.underscore,
+      service_code: rate.code.presence || rate.name.underscore,
       total_price: calculate_price,
       currency: rate.shop.currency,
       description: rate.description,

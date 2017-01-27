@@ -47,10 +47,18 @@
             </div>
           </div>
 
+          <% if rate.notes.present? %>
+            <div class="cell-container">
+              <div class="cell-column">
+                <h1><%= rate.notes %></h1>
+              </div>
+            </div>
+          <% end %>
+
           <% if rate.limits.any? %>
             <div class="cell-container">
               <div class="cell-column">
-                <h1>This rate is only valid for orders within those limits;</h1>
+                <h1>This rate is only valid for orders within those limits:</h1>
                 <ul>
                   <% if rate.min_price.present? %>
                     <li>

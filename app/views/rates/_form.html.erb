@@ -2,7 +2,7 @@
   <div class="section">
     <div class="section-summary">
       <h1>Details</h1>
-      <p>Publicly available information regarding the shipping rate.</p>
+      <p>Information shown in the cart regarding this shipping rate.</p>
     </div>
     <div class="section-content">
       <div class="section-row">
@@ -11,6 +11,23 @@
           <%= f.text_field :name, placeholder: 'Bike delivery' %>
           <%= f.label :description %>
           <%= f.text_area :description, placeholder: 'I offer personal bike delivery in my neighborhood.' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-summary">
+      <h1>Admin</h1>
+      <p>Optional and only for your internal use.  The 'code' is kept with the Shopify order data and is useful for matching shipping methods with third-party systems.</p>
+    </div>
+    <div class="section-content">
+      <div class="section-row">
+        <div class="section-cell">
+          <%= f.label :code %>
+          <%= f.text_field :code, placeholder: 'BIKE' %>
+          <%= f.label :notes %>
+          <%= f.text_area :notes, placeholder: 'Internal notes or description about this rate and what it is for.' %>
         </div>
       </div>
     </div>
