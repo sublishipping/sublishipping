@@ -7,6 +7,7 @@ class Rate < ActiveRecord::Base
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }
   validates :price_weight_modifier, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }
+  validates :price_weight_modifier_starter, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }
   validates :min_price, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }, allow_nil: true
   validates :max_price, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }, allow_nil: true
   validates :min_grams, numericality: { greater_than_or_equal_to: 0, less_than: 999_999_999 }, allow_nil: true

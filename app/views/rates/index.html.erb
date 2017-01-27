@@ -36,6 +36,11 @@
                       )
                     %>
                     <%= " per gram" %>
+
+                    <% unless rate.price_weight_modifier_starter.zero? %>
+                      <%= " after " %>
+                      <%= pluralize(rate.price_weight_modifier_starter, "gram") %>
+                    <% end %>
                   <% end %>
                 </span>
               </h1>

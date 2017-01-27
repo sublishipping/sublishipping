@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125191129) do
+ActiveRecord::Schema.define(version: 20170127210954) do
 
   create_table "conditions", force: :cascade do |t|
     t.integer  "rate_id"
@@ -37,16 +37,17 @@ ActiveRecord::Schema.define(version: 20170125191129) do
     t.integer  "shop_id"
     t.string   "name"
     t.integer  "price"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.text     "description"
     t.integer  "min_grams"
     t.integer  "max_grams"
     t.integer  "min_price"
     t.integer  "max_price"
-    t.float    "price_weight_modifier", default: 0.0, null: false
+    t.float    "price_weight_modifier",         default: 0.0, null: false
     t.string   "code"
     t.text     "notes"
+    t.integer  "price_weight_modifier_starter", default: 0,   null: false
     t.index ["shop_id"], name: "index_rates_on_shop_id"
   end
 

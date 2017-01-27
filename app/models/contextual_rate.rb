@@ -28,7 +28,8 @@ class ContextualRate
   private
 
   def calculate_price
-    total_price = rate.price + (items_grams * rate.price_weight_modifier)
+    grams_price = [items_grams - rate.price_weight_modifier_starter, 0].max * rate.price_weight_modifier
+    total_price = rate.price + grams_price
 
     rate.product_specific_prices.each do |product_specific_price|
       items.each do |item|
