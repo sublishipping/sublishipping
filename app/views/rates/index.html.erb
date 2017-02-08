@@ -143,7 +143,11 @@
                   <% rate.conditions.each do |condition| %>
                     <li>
                       <% if Matcher::PRODUCT_FIELDS.include?(condition.field) %>
-                        <%= "all" %>
+                        <% if condition.all_items_must_match? %>
+                          <%= "all" %>
+                        <% else %>
+                          <%= "at least one" %>
+                        <% end %>
                         <%= t(condition.field, scope: 'matcher.fields').downcase.pluralize %>
                       <% else %>
                         <%= "the destination" %>

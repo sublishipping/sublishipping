@@ -61,3 +61,18 @@ $('body').on('click', '[data-product_specific_price-destroy]',  function (event)
   var parent = $(event.target).closest("[data-product_specific_price]");
   parent.hide().find('input[type="hidden"]').attr('value', 1);
 });
+
+// Condition product fields
+$('body').on('change', '[data-condition-field]', function(event) {
+  $target = $(event.target);
+  $parent = $target.closest("[data-condition]");
+  $values = $parent.find('[data-product-attributes]')
+
+  if (['name', 'sku', 'vendor'].indexOf($target.val()) > 0) {
+    $values.show();
+  } else {
+    $values.hide();
+  }
+});
+
+$('[data-condition-field]').trigger('change');

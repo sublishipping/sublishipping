@@ -12,7 +12,7 @@
         f.select :field,
           Matcher::FIELDS.map { |field| [t(field, scope: 'matcher.fields'), field] },
           { prompt: 'Field' },
-          { class: 'select' }
+          { class: 'select', data: { condition_field: true } }
       %>
     </div>
 
@@ -28,5 +28,13 @@
 
     <%= f.label :value %>
     <%= f.text_field :value %>
+
+    <div data-product-attributes style="display: none;">
+      <%= f.radio_button :all_items_must_match, true %>
+      <%= f.label :all_items_must_match_true, "All items in carts must match" %>
+
+      <%= f.radio_button :all_items_must_match, false %>
+      <%= f.label :all_items_must_match_false, "At least one item must match" %>
+    </div>
   </div>
 </div>

@@ -68,7 +68,7 @@ class RatesController < ShopifyApp::AuthenticatedController
   end
 
   def condition_params
-    [:id, :field, :verb, :value, :_destroy]
+    [:id, :field, :verb, :value, :all_items_must_match, :_destroy]
   end
 
   def product_specific_price_params
