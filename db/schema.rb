@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127210954) do
+ActiveRecord::Schema.define(version: 20170208012010) do
 
   create_table "conditions", force: :cascade do |t|
     t.integer  "rate_id"
-    t.string   "field",      null: false
-    t.string   "verb",       null: false
-    t.text     "value",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "field",                               null: false
+    t.string   "verb",                                null: false
+    t.text     "value",                               null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "all_items_must_match", default: true
     t.index ["rate_id"], name: "index_conditions_on_rate_id"
   end
 

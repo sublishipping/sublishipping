@@ -76,8 +76,14 @@ class ContextualRate
 
   def valid_conditions?
     rate.conditions.all? do |condition|
-     if Matcher::PRODUCT_FIELDS.include?(condition.field)
-       items.all? { |item| condition.valid_for?(item[condition.field]) }
+      if Matcher::PRODUCT_FIELDS.include?(condition.field)
+        block = ->(item) { condition.valid_for?(item[condition.field]) }
+
+        if condition.all_items_must_match?
+          items.all?(&block)
+        else
+          items.any?(&block)
+        end
      else
        condition.valid_for?(addrs[condition.field])
      end
