@@ -91,7 +91,7 @@ Let's say you'd like to match all Northern Ireland postcodes, you could go as fo
 
 - **Field**: Zip code
 - **Verb**: Regular expression
-- **Value**: ^BT\d{1,2}$
+- **Value**: ^BT\d{1,2}
 
 Rate would then be valid for all addresses with a zip code that starts with BT, immediately followed by one or two digits.
 
